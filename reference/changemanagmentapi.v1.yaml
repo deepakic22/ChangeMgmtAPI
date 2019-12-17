@@ -1,0 +1,659 @@
+openapi: 3.0.0
+info:
+  title: ChangeManagmentAPI
+  version: '1.0'
+  contact:
+    name: TIQ Support Team
+    email: abc@abc.com
+    url: 'http://www.abc.com'
+  termsOfService: 'http://www.abc.com'
+  license:
+    name: TIQ
+    url: 'http://www.abc.com'
+  description: Change Managment API is used to interact with database to update the transcation status and to fetch the transcation details
+servers:
+  - url: 'http://telusiq-corporatesubscriberchangemanagementrestsvc-it01.paas-app-east-np.tsl.telus.com'
+    description: IT01
+paths:
+  '/v1/smo/servicemgmt/corporatechangemanagement/subscriber/changerequest/{changerequestid}':
+    get:
+      summary: This URI is used to fetch single transaction by using ChangerequestId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  changeRequestId:
+                    type: string
+                    description: The unique identifier for particular transaction whose details are needed to be pulled from database
+                  orderId:
+                    type: string
+                    description: Order Id of the request
+                  changeRequestStatusCd:
+                    type: string
+                    description: This the status of the request
+                  changeRequestCreationDt:
+                    type: string
+                    description: This is creation date of the request
+                  changeRequestLastUpdatedDt:
+                    type: string
+                    description: This is the last updated date of the request
+                  userId:
+                    type: string
+                    description: User Id of the request
+                  changeRequestSpecification:
+                    type: object
+                    description: Request Specification of the request
+                    properties:
+                      changeRequestTypeCd:
+                        type: string
+                        description: This is the request type of the request
+                      subscriptionId:
+                        type: string
+                        description: This is the subscriptionId of the request
+                      phoneNum:
+                        type: string
+                        description: This is phoneNum of the request
+                      banNum:
+                        type: string
+                        description: This is the accountNumber of the request
+                      contractId:
+                        type: string
+                        description: This is the contract of the request
+                      changeRequestDescEnTxt:
+                        type: string
+                        description: This is the descptrion in english
+                      changeRequestDescFrTxt:
+                        type: string
+                        description: This is the descptrion in french
+              examples:
+                Sample Success Response:
+                  value:
+                    changeRequestId: '23690'
+                    orderId: TIQ23111
+                    changeRequestStatusCd: CD
+                    changeRequestCreationDt: '2019-11-27 17:37:39.0'
+                    changeRequestLastUpdatedDt: '2019-11-27 17:37:46.0'
+                    userId: T823611
+                    changeRequestSpecification:
+                      changeRequestTypeCd: CHANGE_STATUS
+                      subscriptionId: '8429385'
+                      phoneNum: '4161440004'
+                      newPhoneNum: NA
+                      banNum: '70639843'
+                      contractId: '4300004'
+                      changeRequestDescEnTxt: Change status is completed
+                      changeRequestDescFrTxt: "Modifier l'état est terminé"
+                      tiqErrorCd: TIQAPI0010
+                    requesterName: Rina Shaunak
+                    futureDate: '2019-11-27 17:37:39.0'
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  changeRequestId:
+                    type: string
+                    description: The unique identifier for particular transaction whose details are needed to be pulled from database
+                  orderId:
+                    type: string
+                    description: Order Id of the request
+                  changeRequestStatusCd:
+                    type: string
+                    description: This the status of the request
+                  changeRequestCreationDt:
+                    type: string
+                    description: This is creation date of the request
+                  changeRequestLastUpdatedDt:
+                    type: string
+                    description: This is the last updated date of the request
+                  userId:
+                    type: string
+                    description: UserId in request
+                  changeRequestSpecification:
+                    type: object
+                    description: Reuest Specification Details
+                    properties:
+                      changeRequestTypeCd:
+                        type: string
+                        description: This is the request type of the request
+                      subscriptionId:
+                        type: string
+                        description: This is the subscriptionId of the request
+                      phoneNum:
+                        type: string
+                        description: This is phoneNum of the request
+                      banNum:
+                        type: string
+                        description: This is the accountNumber of the request
+                      contractId:
+                        type: string
+                      changeRequestDescEnTxt:
+                        type: string
+                        description: This is the descptrion in english
+                      changeRequestDescFrTxt:
+                        type: string
+                        description: This is the descptrion in french
+              examples:
+                Sample Success Response:
+                  value:
+                    changeRequestId: '23690'
+                    orderId: TIQ23111
+                    changeRequestStatusCd: CD
+                    changeRequestCreationDt: '2019-11-27 17:37:39.0'
+                    changeRequestLastUpdatedDt: '2019-11-27 17:37:46.0'
+                    userId: T823611
+                    changeRequestSpecification:
+                      changeRequestTypeCd: CHANGE_STATUS
+                      subscriptionId: '8429385'
+                      phoneNum: '4161440004'
+                      newPhoneNum: NA
+                      banNum: '70639843'
+                      contractId: '4300004'
+                      changeRequestDescEnTxt: Change status is completed
+                      changeRequestDescFrTxt: "Modifier l'état est terminé"
+                      tiqErrorCd: TIQAPI0010
+                    requesterName: Rina Shaunak
+                    futureDate: '2019-11-27 17:37:39.0'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  systemErrorTs:
+                    type: string
+                    description: Timestamp of the error
+                  systemErrorCd:
+                    type: string
+                    description: Generated error code
+                  systemErrorTxt:
+                    type: string
+                    description: Error generated by system
+              examples:
+                Sample Error Response:
+                  value:
+                    systemErrorCd: TIQAPI2001
+                    systemErrorTxt: 'INVALID REQUEST: Change Request Id not found.'
+                    systemErrorTs: 'Thu Dec 12 07:18:20 UTC 2019'
+      operationId: get-v1--smo-servicemgmt-corporatechangemanagement-subscriber
+      description: This URI is used to fetch single transaction by using ChangerequestId
+      tags:
+        - ChangeMgmtAPI
+    parameters:
+      - schema:
+          type: string
+        name: changerequestid
+        in: path
+        required: true
+        description: The unique identifier for particular transaction whose details are needed to be pulled from database
+  /v1/smo/servicemgmt/corporatechangemanagement/subscriber/changerequest:
+    get:
+      summary: This URI is used to fetch all transaction by using Input parameter
+      tags:
+        - ChangeMgmtAPI
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  changeRecords:
+                    type: object
+                    properties:
+                      changeRequestId:
+                        type: string
+                      orderId:
+                        type: string
+                      changeRequestStatusCd:
+                        type: string
+                      changeRequestCreationDt:
+                        type: string
+                      changeRequestLastUpdatedDt:
+                        type: string
+                      userId:
+                        type: string
+                      uri:
+                        type: string
+                      requesterName:
+                        type: string
+                      futureDate:
+                        type: string
+                      changeRequestSpecification:
+                        $ref: '#/components/schemas/ChangeRequestSpecificationVO'
+                  metadata:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                      perRequest:
+                        type: integer
+                      totalCount:
+                        type: integer
+                      sort:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                          first:
+                            type: string
+                          previous:
+                            type: string
+                          next:
+                            type: string
+                          last:
+                            type: string
+              examples:
+                Sample Success Response:
+                  value:
+                    changeRecords:
+                      - changeRequestId: '27625'
+                        orderId: TIQ27105
+                        changeRequestStatusCd: CD
+                        changeRequestCreationDt: '2019-12-12 14:48:37.0'
+                        changeRequestLastUpdatedDt: '2019-12-12 14:48:42.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Change status is completed
+                          changeRequestDescFrTxt: "Modifier l'état est terminé"
+                          tiqErrorCd: TIQAPI0010
+                        uri: /changerequest/27625
+                        requesterName: Rene Woon-Fat
+                        futureDate: '2019-12-12 14:48:37.0'
+                      - changeRequestId: '27624'
+                        orderId: TIQ27104
+                        changeRequestStatusCd: CD
+                        changeRequestCreationDt: '2019-12-12 14:46:25.0'
+                        changeRequestLastUpdatedDt: '2019-12-12 14:46:29.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Change status is completed
+                          changeRequestDescFrTxt: "Modifier l'état est terminé"
+                          tiqErrorCd: TIQAPI0010
+                        uri: /changerequest/27624
+                        requesterName: Rene Woon-Fat
+                        futureDate: '2019-12-12 14:46:25.0'
+                      - changeRequestId: '23690'
+                        orderId: TIQ23111
+                        changeRequestStatusCd: CD
+                        changeRequestCreationDt: '2019-11-27 17:37:39.0'
+                        changeRequestLastUpdatedDt: '2019-11-27 17:37:46.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Change status is completed
+                          changeRequestDescFrTxt: "Modifier l'état est terminé"
+                          tiqErrorCd: TIQAPI0010
+                        uri: /changerequest/23690
+                        requesterName: Rina Shaunak
+                        futureDate: '2019-11-27 17:37:39.0'
+                      - changeRequestId: '23681'
+                        orderId: TIQ23103
+                        changeRequestStatusCd: CD
+                        changeRequestCreationDt: '2019-11-27 16:51:11.0'
+                        changeRequestLastUpdatedDt: '2019-11-27 16:51:13.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_NAME
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Change subscriber name is completed
+                          changeRequestDescFrTxt: "Modifier le nom de l'abonné est terminé"
+                          tiqErrorCd: TIQAPI0005
+                        uri: /changerequest/23681
+                        requesterName: Rina Shaunak
+                        futureDate: '2019-11-27 16:51:11.0'
+                      - changeRequestId: '23608'
+                        orderId: TIQ22805
+                        changeRequestStatusCd: F
+                        changeRequestCreationDt: '2019-11-25 15:57:27.0'
+                        changeRequestLastUpdatedDt: '2019-11-25 10:28:20.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Action failed. Please contact the IQ Care team via chat or 1-888-256-8315 for assistance.
+                          changeRequestDescFrTxt: Échec de l’action. Communiquez avec le soutien Gestion mobile intelligente de TELUS par clavardage ou au numéro sans frais 1-888-256-8315 pour obtenir de l’aide.
+                          tiqErrorCd: TIQAPI4443
+                        uri: /changerequest/23608
+                        requesterName: Rene Woon-Fat
+                        futureDate: '2019-12-06 00:00:00.0'
+                      - changeRequestId: '23607'
+                        orderId: TIQ22804
+                        changeRequestStatusCd: F
+                        changeRequestCreationDt: '2019-11-25 15:55:11.0'
+                        changeRequestLastUpdatedDt: '2019-11-25 10:27:08.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Action failed. Please contact the IQ Care team via chat or 1-888-256-8315 for assistance.
+                          changeRequestDescFrTxt: Échec de l’action. Communiquez avec le soutien Gestion mobile intelligente de TELUS par clavardage ou au numéro sans frais 1-888-256-8315 pour obtenir de l’aide.
+                          tiqErrorCd: TIQAPI4443
+                        uri: /changerequest/23607
+                        requesterName: Rene Woon-Fat
+                        futureDate: '2019-12-06 00:00:00.0'
+                      - changeRequestId: '23505'
+                        orderId: TIQ22703
+                        changeRequestStatusCd: CD
+                        changeRequestCreationDt: '2019-11-25 15:19:30.0'
+                        changeRequestLastUpdatedDt: '2019-11-25 09:50:24.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Change status is completed
+                          changeRequestDescFrTxt: "Modifier l'état est terminé"
+                          tiqErrorCd: TIQAPI0013
+                        uri: /changerequest/23505
+                        requesterName: Rene Woon-Fat
+                        futureDate: '2019-12-06 00:00:00.0'
+                      - changeRequestId: '23503'
+                        orderId: TIQ22702
+                        changeRequestStatusCd: CD
+                        changeRequestCreationDt: '2019-11-25 12:28:41.0'
+                        changeRequestLastUpdatedDt: '2019-11-25 07:01:31.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Change status is completed
+                          changeRequestDescFrTxt: "Modifier l'état est terminé"
+                          tiqErrorCd: TIQAPI0010
+                        uri: /changerequest/23503
+                        requesterName: Rene Woon-Fat
+                        futureDate: '2019-12-06 00:00:00.0'
+                      - changeRequestId: '23605'
+                        orderId: TIQ22803
+                        changeRequestStatusCd: F
+                        changeRequestCreationDt: '2019-11-25 12:26:20.0'
+                        changeRequestLastUpdatedDt: '2019-11-25 06:57:13.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Action failed. Please contact the IQ Care team via chat or 1-888-256-8315 for assistance.
+                          changeRequestDescFrTxt: Échec de l’action. Communiquez avec le soutien Gestion mobile intelligente de TELUS par clavardage ou au numéro sans frais 1-888-256-8315 pour obtenir de l’aide.
+                          tiqErrorCd: TIQAPI6000
+                        uri: /changerequest/23605
+                        requesterName: Rene Woon-Fat
+                        futureDate: '2019-12-06 00:00:00.0'
+                      - changeRequestId: '23603'
+                        orderId: TIQ22802
+                        changeRequestStatusCd: F
+                        changeRequestCreationDt: '2019-11-25 12:22:45.0'
+                        changeRequestLastUpdatedDt: '2019-11-25 06:53:41.0'
+                        userId: T823611
+                        changeRequestSpecification:
+                          changeRequestTypeCd: CHANGE_STATUS
+                          subscriptionId: '8429385'
+                          phoneNum: '4161440004'
+                          newPhoneNum: NA
+                          banNum: '70639843'
+                          contractId: '4300004'
+                          changeRequestDescEnTxt: Action failed. Please contact the IQ Care team via chat or 1-888-256-8315 for assistance.
+                          changeRequestDescFrTxt: Échec de l’action. Communiquez avec le soutien Gestion mobile intelligente de TELUS par clavardage ou au numéro sans frais 1-888-256-8315 pour obtenir de l’aide.
+                          tiqErrorCd: TIQAPI6000
+                        uri: /changerequest/23603
+                        requesterName: Rene Woon-Fat
+                        futureDate: '2019-12-06 00:00:00.0'
+                    metadata:
+                      offset: 0
+                      perRequest: 10
+                      totalCount: 54
+                      sort: '-creationdate'
+                      links:
+                        self: '/changerequest?limit=10&offset=0'
+                        first: '/changerequest?limit=10&offset=0'
+                        next: '/changerequest?limit=10&offset=10'
+                        last: '/changerequest?limit=10&offset=50'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  systemErrorCd:
+                    type: string
+                  systemErrorTxt:
+                    type: string
+                  systemErrorTs:
+                    type: string
+              examples:
+                Sample Error Response:
+                  value:
+                    systemErrorCd: TIQAPI2001
+                    systemErrorTxt: No data found for given input.
+                    systemErrorTs: 'Tue Dec 17 09:22:58 UTC 2019'
+      operationId: get-v1-smo-servicemgmt-corporatechangemanagement-subscriber-changerequest
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: serviceorderid
+          description: Unique identifier for a single order of request through which one or many subscribers can be requested to be changed
+        - schema:
+            type: string
+          in: query
+          name: subscriptionid
+          description: Key to filter the change requests based on subscriptionid
+        - schema:
+            type: string
+          in: query
+          name: accountnum
+          description: Key to filter the change requests based on the list of account numbers
+        - schema:
+            type: string
+          in: query
+          name: phonenum
+        - schema:
+            type: string
+          in: query
+          name: changerequeststatus
+          description: Key to filter the change requests based on changerequeststatus
+        - schema:
+            type: string
+          in: query
+          name: contractid
+          description: Key to filter the change requests based on contract id
+        - schema:
+            type: string
+          in: query
+          name: creationdate
+          description: 'key to filter the change requests based on its creation date. Format is creationdate.gt=,creationdate.lt='
+        - schema:
+            type: string
+          in: query
+          name: offset
+          description: Requested index for start of resources to be provided in response requested by client
+        - schema:
+            type: string
+          in: query
+          name: lastupdateddate
+          description: 'Key to filter the change requests based on its last updated date.Format is lastupdateddate.gt=,lastupdateddate.lt='
+        - schema:
+            type: string
+          in: query
+          name: sort
+          description: "Key to sort the change requests based on the field given in sortBy. e.g. 'sortBy=lastUpdatedDate' would assume that its a request to sort the records by lastUpdatedDate with '' sign denoting its ascending order"
+        - schema:
+            type: string
+          in: query
+          name: limit
+          description: Requested number of resources to be provided in response requested by client
+        - schema:
+            type: string
+          in: query
+          name: timeperiod
+          description: Key to filter the change requests based on the time period in days
+        - schema:
+            type: string
+          in: query
+          name: requesterName
+          description: Key to filter the change requests based on the requesterName
+        - schema:
+            type: string
+          in: query
+          name: userId
+          description: Key to filter the change requests based on the userId
+        - schema:
+            type: string
+          in: query
+          name: requestType
+          description: Key to filter the change requests based on the requestType
+        - schema:
+            type: string
+          in: query
+          name: fields
+          description: 'Key to filter the change requests based on the fields. eg:summary'
+        - schema:
+            type: string
+          in: query
+          name: summary
+          description: 'Key to filter the change requests. If true, then pull all the transactions and false will pull the latest record.'
+      description: This URI is used to fetch all transaction by using Input parameter
+components:
+  schemas:
+    ChangeReqManagementResponseVO:
+      title: ChangeReqManagementResponseVO
+      type: object
+      description: ChangeReqManagementResponseVO which store final response
+      properties:
+        changeRequestId:
+          type: string
+        orderId:
+          type: string
+        changeRequestStatusCd:
+          type: string
+        changeRequestCreationDt:
+          type: string
+        changeRequestLastUpdatedDt:
+          type: string
+        userId:
+          type: string
+        uri:
+          type: string
+        requesterName:
+          type: string
+        futureDate:
+          type: string
+        changeRequestSpecification:
+          $ref: '#/components/schemas/ChangeRequestSpecificationVO'
+      x-examples:
+        example-1: {}
+    ChangeRequestSpecificationVO:
+      title: ChangeRequestSpecificationVO
+      type: object
+      x-examples:
+        example-1: {}
+      description: ChangeRequestSpecificationVO stores request specification details
+      properties:
+        changeRequestTypeCd:
+          type: string
+        subscriptionId:
+          type: string
+        phoneNum:
+          type: string
+        newPhoneNum:
+          type: string
+        banNum:
+          type: string
+        contractId:
+          type: string
+        changeRequestDescEnTxt:
+          type: string
+        changeRequestDescFrTxt:
+          type: string
+        changeRequestSummaryEnTxt:
+          type: string
+        changeRequestSummaryFrTxt:
+          type: string
+        tiqErrorCd:
+          type: string
+    FetchAllChangeRequestsVO:
+      title: FetchAllChangeRequestsVO
+      type: object
+      description: This store final response
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MetaDataVO'
+        changeRecords:
+          $ref: '#/components/schemas/ChangeReqManagementResponseVO'
+    LinksVO:
+      title: LinksVO
+      type: object
+      properties:
+        self:
+          type: string
+        first:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        last:
+          type: string
+      description: This store links details
+    MetaDataVO:
+      title: MetaDataVO
+      type: object
+      properties:
+        offset:
+          type: integer
+        perRequest:
+          type: integer
+        totalCount:
+          type: integer
+        sort:
+          type: string
+        links:
+          $ref: '#/components/schemas/LinksVO'
+      description: This store metadata information
